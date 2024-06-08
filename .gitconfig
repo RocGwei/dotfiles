@@ -1,0 +1,9 @@
+[user]
+	name = Roc
+  email = roc.gui@foxmail.com
+[init]
+  defaultBranch = master
+[commit]
+  template = ~/.gitmessage
+[core]
+  editor = nvim
