@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  # home-manager for Archlinux on Mechrevo
   home = {
     username = "roc";
     homeDirectory = "/home/roc";

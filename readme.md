@@ -19,16 +19,17 @@ Dotfile with home-manager
     substituters = https://mirrors.ustc.edu.cn/nix-channels/store https://cache.nixos.org/
     ```
 
-    or temporary config
+    or temporary configuration, run
 
-    ```conf
+    ```bash
     export NIX_CONFIG="experimental-features = nix-command flakes"
     ```
 
-3. Clone this repo inside `~/.config/home-manager`
+3. Clone this repo anywhere, and get into the repo
 
     ```bash
-    git clone ... ~/.config/home-manager
+    git clone  https://github.com/RocGwei/dotfiles.git
+    cd dotfiles
     ```
 
 4. Setup home-manager
@@ -36,7 +37,7 @@ Dotfile with home-manager
     If you don't have home-manager (check with `home-manager --version`) run
 
     ```bash
-    nix run nixpkgs#home-manager -- switch
+    nix run nixpkgs#home-manager -- switch --flake .#username@hostname
     ```
 
     and `home-manager` will manage itself
@@ -44,10 +45,10 @@ Dotfile with home-manager
     If have, just run
 
     ```bash
-    home-manager -- switch
+    home-manager switch --flake .#username@hostname
     ```
 
 ## TODO
 
 - [ ] configuration for multiple machine(current only Archlinux)
-- [ ] finish bootstrap script
+- [ ] finish bootstrap script for Archlinux
