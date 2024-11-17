@@ -27,14 +27,6 @@ case ":$PATH:" in
 esac
 # End of lines configured by pnpm
 
-# Lines configured by fcitx
-# https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
-# export XMODIFIERS=@im=Fcitx
-# unset GTK_IM_MODULE
-# unset QT_IM_MODULE
-# unset SDL_IM_MODULE
-# End of lines configured by fcitx
-
 # Lines configured by Roc
 ## plugin and theme
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -42,14 +34,16 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 ## zoxide
 eval "$(zoxide init zsh)"
+## fzf
+source <(fzf --zsh)
 ## command alias
 alias ll='lsd -l'
-alias la='lsd -a'
+alias la='lsd -A'
 alias lt='lsd --tree'
-alias lla='lsd -l -a'
+alias lla='lsd -l -A'
 alias nvim='proxychains -q nvim'
 ## scripts
-source ~/dev/script/zsh-fun.zsh
+#source ~/dev/script/zsh-fun.zsh
 if [[ "$(who am i)" == *tty* ]]; then
   [[ ! -f ~/.p10k.tty.zsh ]] || source ~/.p10k.tty.zsh
 else
