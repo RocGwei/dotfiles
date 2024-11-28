@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs =
     {
       nixpkgs,
@@ -19,10 +20,36 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
+      nixosConfigurations = {
+        "Dell-G3" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit pkgs;
+          };
+          modules = [
+            ./host/Dell-G3/configuration.nix
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        "roc@Dell-G3" = home-manager.lib.homeManagerConfiguration {
+          #extraSpecialArgs = {
+          inherit pkgs;
+          #};
+          modules = [
+            ./home-manager/roc-dell-g3.nix
+          ];
+        };
+      };
+
       homeConfigurations = {
         "roc@Mechrevo" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home-manager/roc-mechrevo.nix ];
+          extraSpecialArgs = {
+            inherit pkgs;
+          };
+          modules = [
+            ./home-manager/roc-mechrevo.nix
+          ];
         };
       };
     };
