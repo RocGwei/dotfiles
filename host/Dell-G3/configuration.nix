@@ -1,7 +1,7 @@
 {
-  # config,
-  # lib,
+  system,
   pkgs,
+  distro-grub-themes,
   ...
 }:
 {
@@ -10,12 +10,14 @@
   ];
 
   boot = {
-    # kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
     loader = {
-      grub = {
+      grub = rec {
         enable = true;
         device = "nodev";
         efiSupport = true;
+        theme = distro-grub-themes.packages.${system}.nixos-grub-theme;
+        splashImage = "${theme}/splash_image.jpg";
         extraEntries = ''
           menuentry "Windows" {
               search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
@@ -88,7 +90,7 @@
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
       type = "fcitx5";
-      #waylandFrontend = true;
+      fcitx5.waylandFrontend = true;
       fcitx5.addons = with pkgs; [
         rime-data
         fcitx5-gtk
@@ -102,16 +104,14 @@
     waybar.enable = true;
     git = {
       enable = true;
-      #userName = "Roc";
-      #userEmail = "roc.gui@foxmail.com";
-      #lfs.enable = true;
+      lfs.enable = true;
     };
     firefox.enable = true;
     vim.enable = true;
     clash-verge = {
       enable = true;
       package = pkgs.clash-verge-rev;
-      # autostart = true;
+      autoStart = true;
       tunMode = true;
     };
     proxychains = {
@@ -128,11 +128,13 @@
   };
 
   environment.systemPackages = with pkgs; [
+    catppuccin-sddm-corners
     kitty
     curl
     wget
     fastfetch
     wl-clipboard
+    ranger
     tofi
     mako
   ];
@@ -147,6 +149,7 @@
       enable = true;
       wayland.enable = true;
       autoNumlock = true;
+      theme = "catppuccin-sddm-corners";
     };
   };
 
