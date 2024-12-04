@@ -12,7 +12,29 @@
     packages = with pkgs; [
       nixfmt-rfc-style
     ];
-    stateVersion = "24.05";
+
+    file = {
+      ".local/share/fcitx5/rime/default.custom.yaml".text = ''
+        patch:
+          menu/page_size: 8
+          schema_list:
+            - schema: double_pinyin_flypy
+            - schema: luna_pinyin
+      '';
+    };
+
+    stateVersion = "24.11";
+  };
+
+  i18n = {
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        rime-data
+        fcitx5-gtk
+        fcitx5-rime
+      ];
+    };
   };
 
   wayland.windowManager.hyprland = {
