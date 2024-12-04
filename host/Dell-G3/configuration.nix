@@ -101,13 +101,13 @@
 
   programs = {
     hyprland.enable = true;
-    waybar.enable = true;
     git = {
       enable = true;
       lfs.enable = true;
     };
     firefox.enable = true;
     vim.enable = true;
+    zsh.enable = true;
     clash-verge = {
       enable = true;
       package = pkgs.clash-verge-rev;
@@ -129,19 +129,33 @@
 
   environment.systemPackages = with pkgs; [
     catppuccin-sddm-corners
-    kitty
     curl
     wget
     fastfetch
     wl-clipboard
     ranger
-    tofi
-    mako
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.variables = {
-    EDITOR = "vim";
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
+    shells = with pkgs; [
+      zsh
+    ];
+    variables = {
+      EDITOR = "vim";
+    };
+  };
+
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      roc = {
+        isNormalUser = true;
+        useDefaultShell = true;
+        extraGroups = [ "wheel" ];
+        shell = pkgs.zsh;
+      };
+    };
   };
 
   services = {
@@ -150,6 +164,14 @@
       wayland.enable = true;
       autoNumlock = true;
       theme = "catppuccin-sddm-corners";
+    };
+    tailscale.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = true;
+        AllowUsers = [ "roc" ];
+      };
     };
   };
 

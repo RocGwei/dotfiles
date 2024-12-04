@@ -21,6 +21,7 @@
     xwayland.enable = true;
     systemd.enable = true;
     settings = {
+      monitor = ",1920x1080,auto,1";
       "$terminal" = "kitty";
       "$fileManager" = "$terminal -- ranger";
 
@@ -32,8 +33,8 @@
       exec-once = [
         "waybar"
         # "mako"
-        "hyprlock"
-        # "fcitx5"
+        # "hyprlock"
+        "fcitx5"
       ];
 
       general = {
@@ -48,21 +49,12 @@
       decoration = {
         rounding = 5;
 
-        shadow = {
-          enable = true;
-        };
-
         blur = {
-          enable = true;
           size = 3;
           passes = 1;
 
           vibrancy = 0.1696;
         };
-      };
-
-      animations = {
-        enable = "yes";
       };
 
       input = {
@@ -84,7 +76,7 @@
         "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating"
-        "$mainMod, R, exec, exec, tofi-run | xargs hyprctl dispatch exec --"
+        "$mainMod, R, exec, tofi-run | xargs hyprctl dispatch exec --"
         "$mainMod, P, pseudo"
         "$mainMod, J, togglesplit"
 
@@ -166,6 +158,10 @@
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+    };
+    kitty = {
+      enable = true;
+      themeFile = "GruvboxMaterialDarkMedium";
     };
     tofi = {
       enable = true;
