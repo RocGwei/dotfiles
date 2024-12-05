@@ -153,6 +153,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      dotDir = ".config/zsh";
       shellAliases = {
         ll = "ls -l";
         lla = "ls -lA";
@@ -165,6 +166,8 @@
         }
       ];
       initExtra = ''
+        bindkey -e
+        setopt histignorealldups
         source $HOME/.p10k.zsh
         export PATH="$HOME/.local/bin:$PATH"
       '';
