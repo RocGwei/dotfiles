@@ -6,6 +6,9 @@
 
 {
   # home-manager for NixOS on Dell-G3 with Hyperland
+  imports = [
+    ./nixos/nvim/lazyvim.nix
+  ];
   home = {
     username = "roc";
     homeDirectory = "/home/roc";
